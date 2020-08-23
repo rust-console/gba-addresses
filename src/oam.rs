@@ -31,13 +31,13 @@
 use super::*;
 
 /// Base address of the object attribute `attr0` fields.
-pub const OBJ_ATTR0_BASE: usize = 0x0700_0000;
+pub const OBJ_ATTR0_BASE_ADDR: usize = 0x0700_0000;
 
 /// Base address of the object attribute `attr1` fields.
-pub const OBJ_ATTR1_BASE: usize = 0x0700_0002;
+pub const OBJ_ATTR1_BASE_ADDR: usize = 0x0700_0002;
 
 /// Base address of the object attribute `attr2` fields.
-pub const OBJ_ATTR2_BASE: usize = 0x0700_0004;
+pub const OBJ_ATTR2_BASE_ADDR: usize = 0x0700_0004;
 
 /// Stride of each object attribute entry.
 pub const OBJ_ATTR_STRIDE: usize = 8;
@@ -55,20 +55,20 @@ pub const OBJ_ATTR_COUNT: usize = 128;
 /// `i` must be < 128.
 pub const fn index_obj_attr(i: usize) -> usize {
   let checked_index = const_bound_check(i, OBJ_ATTR_COUNT);
-  OBJ_ATTR0_BASE + (OBJ_ATTR_STRIDE * checked_index)
+  OBJ_ATTR0_BASE_ADDR + (OBJ_ATTR_STRIDE * checked_index)
 }
 
 /// Base address of the affine parameter `pa` fields.
-pub const OBJ_AFFINE_PA_BASE: usize = 0x0700_0006;
+pub const OBJ_AFFINE_PA_BASE_ADDR: usize = 0x0700_0006;
 
 /// Base address of the affine parameter `pb` fields.
-pub const OBJ_AFFINE_PB_BASE: usize = 0x0700_000E;
+pub const OBJ_AFFINE_PB_BASE_ADDR: usize = 0x0700_000E;
 
 /// Base address of the affine parameter `pc` fields.
-pub const OBJ_AFFINE_PC_BASE: usize = 0x0700_0016;
+pub const OBJ_AFFINE_PC_BASE_ADDR: usize = 0x0700_0016;
 
 /// Base address of the affine parameter `pd` fields.
-pub const OBJ_AFFINE_PD_BASE: usize = 0x0700_001E;
+pub const OBJ_AFFINE_PD_BASE_ADDR: usize = 0x0700_001E;
 
 /// Stride of each affine parameter entry.
 pub const OBJ_AFFINE_STRIDE: usize = OBJ_ATTR_STRIDE * 4;
@@ -85,5 +85,5 @@ pub const OBJ_AFFINE_COUNT: usize = 32;
 /// `i` must be < 32.
 pub const fn index_obj_affine_param(i: usize) -> usize {
   let checked_index = const_bound_check(i, OBJ_AFFINE_COUNT);
-  OBJ_AFFINE_PA_BASE + (OBJ_AFFINE_STRIDE * checked_index)
+  OBJ_AFFINE_PA_BASE_ADDR + (OBJ_AFFINE_STRIDE * checked_index)
 }
