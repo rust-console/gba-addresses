@@ -220,17 +220,29 @@ pub const WIN0V_ADDR: usize = 0x0400_0044;
 /// * **Size:** 2
 pub const WIN1V_ADDR: usize = 0x0400_0046;
 
-/// Window 0 and 1 insides.
+/// Window 0 inside display.
 ///
 /// * **Access:** read/write
-/// * **Size:** 2
-pub const WININ_ADDR: usize = 0x0400_0048;
+/// * **Size:** 1
+pub const WIN0_IN_ADDR: usize = 0x0400_0048;
 
-/// Object window insides and outside of all windows.
+/// Window 1 inside display.
 ///
 /// * **Access:** read/write
-/// * **Size:** 2
-pub const WINOUT_ADDR: usize = 0x0400_004A;
+/// * **Size:** 1
+pub const WIN1_IN_ADDR: usize = 0x0400_0049;
+
+/// Outside window display.
+///
+/// * **Access:** read/write
+/// * **Size:** 1
+pub const WIN_OUT_ADDR: usize = 0x0400_004A;
+
+/// Object window display.
+///
+/// * **Access:** read/write
+/// * **Size:** 1
+pub const OBJ_WIN_ADDR: usize = 0x0400_004B;
 
 // // // // //
 // Special Effects
@@ -248,16 +260,22 @@ pub const MOSAIC_ADDR: usize = 0x0400_004C;
 /// * **Size:** 2
 pub const BLDCNT_ADDR: usize = 0x0400_0050;
 
-/// Alpha blend coefficients.
+/// Alpha blend `EVA`.
 ///
 /// * **Access:** read/write
-/// * **Size:** 2
-pub const BLDALPHA_ADDR: usize = 0x0400_0052;
+/// * **Size:** 1
+pub const BLDALPHA_A_ADDR: usize = 0x0400_0052;
 
-/// Brightness blend coefficients.
+/// Alpha blend `EVB`.
+///
+/// * **Access:** read/write
+/// * **Size:** 1
+pub const BLDALPHA_B_ADDR: usize = 0x0400_0053;
+
+/// Brightness blend `EVY`.
 ///
 /// * **Access:** write-only
-/// * **Size:** 2
+/// * **Size:** 1
 pub const BLDY_ADDR: usize = 0x0400_0054;
 
 // // // // //
@@ -267,80 +285,98 @@ pub const BLDY_ADDR: usize = 0x0400_0054;
 /// Channel 1 Sweep register.
 ///
 /// * **Access:** read/write
-/// * **Size:** 2
-pub const SOUND1CNT_L_ADDR: usize = 0x0400_0060;
+/// * **Size:** 1
+pub const CHANNEL1_SWEEP: usize = 0x0400_0060;
 
 /// Channel 1 duty / len / envelope
 ///
 /// * **Access:** read/write
 /// * **Size:** 2
-pub const SOUND1CNT_H_ADDR: usize = 0x0400_0062;
+pub const CHANNEL1_DUTY_LEN_ENV: usize = 0x0400_0062;
 
 /// Channel 1 frequency / control
 ///
 /// * **Access:** read/write
 /// * **Size:** 2
-pub const SOUND1CNT_X_ADDR: usize = 0x0400_0064;
+pub const CHANNEL1_FREQ_CTRL: usize = 0x0400_0064;
 
 /// Channel 2 duty / len / envelope
 ///
 /// * **Access:** read/write
 /// * **Size:** 2
-pub const SOUND2CNT_L_ADDR: usize = 0x0400_0068;
+pub const CHANNEL2_DUTY_LEN_ENV: usize = 0x0400_0068;
 
 /// Channel 2 frequency / control
 ///
 /// * **Access:** read/write
 /// * **Size:** 2
-pub const SOUND2CNT_H_ADDR: usize = 0x0400_006C;
+pub const CHANNEL2_FREQ_CTRL: usize = 0x0400_006C;
 
 /// Channel 3 stop / wave RAM select
 ///
 /// * **Access:** read/write
-/// * **Size:** 2
-pub const SOUND3CNT_L_ADDR: usize = 0x0400_0070;
+/// * **Size:** 1
+pub const CHANNEL3_SELECT: usize = 0x0400_0070;
 
-/// Channel 3 len / volume
+/// Channel 3 len
+///
+/// * **Access:** write
+/// * **Size:** 1
+pub const CHANNEL3_LEN: usize = 0x0400_0072;
+
+/// Channel 3 volume
 ///
 /// * **Access:** read/write
-/// * **Size:** 2
-pub const SOUND3CNT_H_ADDR: usize = 0x0400_0072;
+/// * **Size:** 1
+pub const CHANNEL3_VOLUME: usize = 0x0400_0073;
 
 /// Channel 3 frequency / control
 ///
 /// * **Access:** read/write
 /// * **Size:** 2
-pub const SOUND3CNT_X_ADDR: usize = 0x0400_0074;
+pub const CHANNEL3_FREQ_CTRL: usize = 0x0400_0074;
 
 /// Channel 4 len / envelope
 ///
 /// * **Access:** read/write
 /// * **Size:** 2
-pub const SOUND4CNT_L_ADDR: usize = 0x0400_0078;
+pub const CHANNEL4_LEN_ENV: usize = 0x0400_0078;
 
 /// Channel 4 frequency / control
 ///
 /// * **Access:** read/write
 /// * **Size:** 2
-pub const SOUND4CNT_H_ADDR: usize = 0x0400_007C;
+pub const CHANNEL4_FREQ_CTRL: usize = 0x0400_007C;
 
 /// Sound Control left/right volume/enable
 ///
 /// * **Access:** read/write
-/// * **Size:** 2
-pub const SOUNDCNT_L_ADDR: usize = 0x0400_0080;
+/// * **Size:** 1
+pub const CHANNELS_LEFT_RIGHT_VOLUME: usize = 0x0400_0080;
+
+/// Sound Control left/right volume/enable
+///
+/// * **Access:** read/write
+/// * **Size:** 1
+pub const CHANNELS_LEFT_RIGHT_ENABLED: usize = 0x0400_0081;
 
 /// DMA Sound Control / Mixing
 ///
 /// * **Access:** read/write
 /// * **Size:** 2
-pub const SOUNDCNT_H_ADDR: usize = 0x0400_0082;
+pub const DMA_MIXING_CTRL: usize = 0x0400_0082;
 
 /// Sound on/off
 ///
 /// * **Access:** read/write
+/// * **Size:** 1
+pub const SOUND_ENABLED_CTRL: usize = 0x0400_0084;
+
+/// Final sound output bias.
+///
+/// * **Access:** read/write
 /// * **Size:** 2
-pub const SOUNDCNT_X_ADDR: usize = 0x0400_0084;
+pub const SOUNDBIAS: usize = 0x0400_0088;
 
 /// Wave RAM data.
 ///
